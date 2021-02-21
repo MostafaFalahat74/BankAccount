@@ -5,59 +5,121 @@ using System.Text;
 
 namespace BankAccount.Controller
 {
-  public  class Operations
+    public class Operations
     {
-        User user = new User();
-         string userName;
-         string AccountNumber;
-         int Inventory;
-         int Age;
-        public  void GetUserInformation()
+        List<User> users = new List<User>();
+        string userName;
+        string aAccountNumber;
+        int accountDeposit;
+        int nationalCard;
+        int inventory;
+        int amountMoneyDeposit;
+        int age;
+
+        public void AccountIsNotExist()
+        {
+            Console.WriteLine("The Account Does Not Exist ");
+        }
+        public void DeleteAccount(int index)
+        {
+            users[index] = null;
+            //user = null;
+            //  Console.WriteLine("Account deleted");
+        }
+        public int ShowInventory(int id)
+        {
+            return users[id].Inventory;
+           // Console.WriteLine(user.Inventory);
+        }
+
+        public void DepositMoneyToAccount()
+        {
+            Console.WriteLine("Plese Enter User amount of money to deposit");
+            amountMoneyDeposit = Int32.Parse(Console.ReadLine());
+           // user.Inventory = user.Inventory + amountMoneyDeposit;
+        }
+        public int CheckAccountExist(int deposit)
+        {
+           // bool result = false;
+            int index = -1;
+
+            for(int i=0; i<users.Count; i++)
+            {
+                if (deposit == users[i].NationalCard)
+                {
+                    index = i;
+                }
+            }
+           
+
+            return index;
+            
+        }
+/*
+
+        public void GetUserInformation()
         {
             Console.WriteLine("Plese Enter User Name");
             userName = Console.ReadLine();
 
+            Console.WriteLine("Plese Enter National Card");
+            nationalCard = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Plese Enter Age");
-            Age = Int32.Parse(Console.ReadLine());
+            age = Int32.Parse(Console.ReadLine());
 
-           
+
 
         }
-
+        */
+        public int GetAccount()
+        {
+            Console.WriteLine("Plese Enter Account to Deposit money");
+            accountDeposit = Int32.Parse(Console.ReadLine());
+            return accountDeposit;
+        }
+        /*
         public void GetUserInventory()
         {
 
             Console.WriteLine("Plese Enter Inventory");
-            Inventory = Int32.Parse(Console.ReadLine());
+            inventory = Int32.Parse(Console.ReadLine());
         }
-
-        public void CreateNewUser()
+        */
+        public User CreateNewUser(string userName ,int nationalCard ,int age ,int inventory)
         {
-            Guid id = new Guid();
-            user.Age = Age;
-            user.Inventory = Inventory;
-            user.UserName = userName;
-            user.Id = id.ToString();
+            //  Guid id = new Guid();
+            User user = new User()
+            {
+            Inventory=inventory,
+            Age=age,
+            NationalCard=nationalCard,
+            UserName=userName
+            };
+            users.Add(user);
+            return user; 
+            
         }
         public void ShowUserPermissionError()
         {
             Console.WriteLine("  your age has under 18");
+            Console.ReadKey();
+            Console.Clear();
         }
         public void ShowUser()
         {
-            Console.WriteLine("name : "+ user.UserName + "AccountId : " + user.Id + "Inventory :" + user.Inventory);
+            Console.WriteLine("  name : " + userName + "  AccountId : " + nationalCard + "  Inventory :  " + inventory);
         }
-
+        /*
         public int GetUserAge()
         {
-            return Age;
+            return age;
         }
-
-        public  bool CheckUserAge(int age)
+        */
+        public bool CheckUserAge(int age)
         {
             bool result = true;
-            if (age<18)
+            if (age < 18)
             {
                 result = false;
             }

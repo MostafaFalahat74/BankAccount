@@ -6,7 +6,7 @@ namespace BankAccount.Models
 {
     public class User
     {
-        public string Id { get; set; }
+        public int NationalCard { get; set; }
         public int Inventory { get; set; }
         public int Age { get; set; }
         public string UserName { get; set; }
